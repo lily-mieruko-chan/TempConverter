@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   DigaOla:
-    runs-on: ubunto-latest
+    runs-on: ubuntu-latest
     steps:
       - run: echo "ola"
     Build:

@@ -1,31 +1,30 @@
+name: Build
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
- 
+    branches:
+      - main
+
 jobs:
-  build:
+  DigaOla:
     runs-on: ubuntu-latest
- 
     steps:
-      - name: Checkout do código
+      - name: Checkout
         uses: actions/checkout@v4
- 
-      - name: Instalar Java
-        uses: actions/setup-java@v4
+      - name: Diga ola
+        uses: ./.github/actions/diga-ola-action
+
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v2
         with:
-          distribution: 'temurin'
           java-version: '21'
- 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
- 
+          distribution: 'temurin'
+      - uses: gradle/actions/setup-gradle@v4
+
       - name: Set Gradle Permission
-        run: chmod +x ./gradlew
- 
-      - name: Build com Gradle
-        run: ./gradlew build
- 
-      - name: Executar testes
-        run: ./gradlew test
+        uses: ./.github/actions/set-gradlew-permission
+
+      - name: Build Project
+        uses: ./.github/actions/build-project

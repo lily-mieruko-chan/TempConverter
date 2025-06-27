@@ -1,8 +1,10 @@
 name: Build
 on:
     push:
-        branches:
-            - main
+      branches: [ main ]
+    pull_request:
+      branches: [ main ]
+ 
 jobs:
     DigaOla:
         runs-on: ubuntu-latest
@@ -26,4 +28,8 @@ jobs:
             - name: Set Gradle Permission
               run: chmod +x ./gradlew
 
-            - run: ./gradlew build
+            - name: Build com Gradle
+              run: ./gradlew build
+
+            - name: Executar testes
+              run: ./gradlew test
